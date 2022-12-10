@@ -1,0 +1,93 @@
+SQL COMMANDS:
+
+1.ROUTE TABLE
+
+CREATE TABLE ROUTE(
+    -> ROUTE_ID INT(5) PRIMARY KEY,
+    -> ORIGIN CHAR(20),
+    -> DESTINATION CHAR(20),
+    -> FARE INT(5),
+    -> DISTANCE INT(5));
+
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| ROUTE_ID    | int      | NO   | PRI | NULL    |       |
+| ORIGIN      | char(20) | YES  |     | NULL    |       |
+| DESTINATION | char(20) | YES  |     | NULL    |       |
+| FARE        | int      | YES  |     | NULL    |       |
+| DISTANCE    | int      | YES  |     | NULL    |       |
++-------------+----------+------+-----+---------+-------+
+
+
+2.STATION TABLE:
+
+CREATE TABLE STATION (
+    -> ROUTE_ID INT(5),
+    -> STATION_ID INT(5),
+    -> STATION_NAME CHAR(20),
+    -> FOREIGN KEY(ROUTE_ID) REFERENCES ROUTE(ROUTE_ID));
+
++--------------+----------+------+-----+---------+-------+
+| Field        | Type     | Null | Key | Default | Extra |
++--------------+----------+------+-----+---------+-------+
+| ROUTE_ID     | int      | YES  | MUL | NULL    |       |
+| STATION_ID   | int      | YES  |     | NULL    |       |
+| STATION_NAME | char(20) | YES  |     | NULL    |       |
++--------------+----------+------+-----+---------+-------+
+
+3.TRAIN TABLE:
+
+CREATE TABLE TRAIN(
+    -> TRAIN_NO INT(10) PRIMARY KEY,
+    -> ROUTE_ID INT(5),
+    -> TRAIN_NAME CHAR(20),
+    -> ORIGIN CHAR(20),
+    -> DESTINATION CHAR(20),
+    -> DEP_TIME CHAR(15),
+    -> ARR_TIME CHAR(15),
+    -> TRAVEL_DATE CHAR(15),
+    -> CAPACITY INT(5),
+    -> INDEX(ROUTE_ID),
+    -> FOREIGN KEY(ROUTE_ID) REFERENCES ROUTE(ROUTE_ID));
+
++-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| TRAIN_NO    | int      | NO   | PRI | NULL    |       |
+| ROUTE_ID    | int      | YES  | MUL | NULL    |       |
+| TRAIN_NAME  | char(20) | YES  |     | NULL    |       |
+| ORIGIN      | char(20) | YES  |     | NULL    |       |
+| DESTINATION | char(20) | YES  |     | NULL    |       |
+| DEP_TIME    | char(15) | YES  |     | NULL    |       |
+| ARR_TIME    | char(15) | YES  |     | NULL    |       |
+| TRAVEL_DATE | char(15) | YES  |     | NULL    |       |
+| CAPACITY    | int      | YES  |     | NULL    |       |
++-------------+----------+------+-----+---------+-------+
+
+
+4. PASSENGER LOGIN TABLE (LOGINP):
+
+CREATE TABLE LOGINP(
+    -> USERNAME_CHAR(20),
+    -> PASSWORD CHAR(20));
+
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| USERNAME | char(20) | YES  |     | NULL    |       |
+| PASSWORD | char(20) | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+
+5.ADMIN LOGIN TABLE (ADMINCRD):
+
+CREATE TABLE ADMINCRD(
+    -> ID_CHAR(20),
+    -> PASSWRD CHAR(20));
+
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| id      | int      | YES  |     | NULL    |       |
+| passwrd | char(30) | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+ 
